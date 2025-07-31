@@ -12,3 +12,13 @@ EMBEDDING_PROVIDER="openai" \
 EMBEDDING_MODEL="text-embedding-3-large" \
 TOOL_FIND_DESCRIPTION="Use this tool to Search company's knowledge repository which is a vector database of past proposal answers, capabilities & past projects to retrieve relevant context." \
 mcp-server-qdrant --transport sse
+
+
+# start to connect to main-cleaned collection
+#OPENAI_API_KEY="..." \
+#QDRANT_URL="http://work.laptop:6333" \
+#COLLECTION_NAME="main-cleaned" \
+#EMBEDDING_PROVIDER="openai" \
+#EMBEDDING_MODEL="text-embedding-ada-002" \
+#TOOL_FIND_DESCRIPTION="Use this tool to Search company's knowledge repository which is a vector database of past proposal answers, capabilities & past projects to retrieve relevant context." \
+#mcp-server-qdrant --transport sse
