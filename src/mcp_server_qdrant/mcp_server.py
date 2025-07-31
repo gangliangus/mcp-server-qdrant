@@ -48,6 +48,7 @@ class QdrantMCPServer(FastMCP):
             self.embedding_provider,
             qdrant_settings.local_path,
             make_indexes(qdrant_settings.filterable_fields_dict()),
+            qdrant_settings.vector_field_name,
         )
 
         super().__init__(name=name, instructions=instructions, **settings)

@@ -42,6 +42,7 @@ class QdrantConnector:
         embedding_provider: EmbeddingProvider,
         qdrant_local_path: str | None = None,
         field_indexes: dict[str, models.PayloadSchemaType] | None = None,
+        vector_field_name: str | None = None,
     ):
         self._qdrant_url = qdrant_url.rstrip("/") if qdrant_url else None
         self._qdrant_api_key = qdrant_api_key
@@ -51,6 +52,7 @@ class QdrantConnector:
             location=qdrant_url, api_key=qdrant_api_key, path=qdrant_local_path
         )
         self._field_indexes = field_indexes
+        self._vector_field_name = vector_field_name
 
     async def get_collection_names(self) -> list[str]:
         """
@@ -118,7 +120,8 @@ class QdrantConnector:
         # it should unlock usage of server-side inference.
 
         query_vector = await self._embedding_provider.embed_query(query)
-        vector_name = self._embedding_provider.get_vector_name()
+        #vector_name = self._embedding_provider.get_vector_name()
+        vector_name = self._vector_field_name
 
         # Search in Qdrant
         search_results = await self._client.query_points(
@@ -131,7 +134,8 @@ class QdrantConnector:
 
         return [
             Entry(
-                content=result.payload["document"],
+                #content=result.payload["document"],
+                content=result.payload["content"],
                 metadata=result.payload.get("metadata"),
             )
             for result in search_results.points

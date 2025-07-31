@@ -91,6 +91,10 @@ class QdrantSettings(BaseSettings):
         default=False, validation_alias="QDRANT_ALLOW_ARBITRARY_FILTER"
     )
 
+    vector_field_name: str | None = Field(
+        default=None, validation_alias="VECTOR_FIELD_NAME"
+    )
+
     def filterable_fields_dict(self) -> dict[str, FilterableField]:
         if self.filterable_fields is None:
             return {}
